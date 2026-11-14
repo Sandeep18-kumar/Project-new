@@ -17,7 +17,7 @@ python -m uvicorn app:app --reload
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000). Use the left navigation to visit `/customers`, `/insights`, and `/campaigns`. Interactive API documentation is available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs); the liveness endpoint is `/health`.
 
-The starter model is fitted at app startup. Campaign plans are persisted in `data/signal.db`; changing a campaign's status or deleting one is supported. Campaign creation only stores a plan: the app does not send emails, texts, or calls. API routes:
+The starter model is fitted at app startup. Locally, campaign plans are stored in `data/signal.db`; changing a campaign's status or deleting one is supported. Campaign creation only stores a plan: the app does not send emails, texts, or calls. API routes:
 
 | Route | Purpose |
 | --- | --- |
@@ -33,7 +33,7 @@ The starter model is fitted at app startup. Campaign plans are persisted in `dat
 
 ## Deploy publicly on Render
 
-This project includes a Render Blueprint (`render.yaml`) and Dockerfile. The Blueprint uses a paid Starter web service and a 1 GB persistent disk so saved campaign plans survive deploys and restarts.
+This project includes a Render Blueprint (`render.yaml`) and Dockerfile. The Blueprint is configured for Render's free web service. Free services can sleep when idle and use an ephemeral filesystem, so campaign plans may be cleared on restart or redeploy. The campaign page displays this storage warning. Upgrade to a paid service with a persistent disk if campaign records must survive restarts.
 
 1. Push this project to a GitHub repository. Do not commit `.env`, `.venv`, or `data/signal.db`.
 2. In Render, choose **New → Blueprint**, connect the repository, and apply the `render.yaml` configuration.

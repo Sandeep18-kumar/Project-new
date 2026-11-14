@@ -191,6 +191,15 @@ async function initCampaigns() {
   };
   try {
     const dashboard = await request("/api/dashboard");
+    const storageNote = $("#campaign-storage-note");
+    const storageFooter = $("#campaign-storage-footer");
+    if (dashboard.campaign_storage_persistent) {
+      storageNote.innerHTML = "<strong>Planning workspace:</strong> Campaigns are saved in the workspace database. Creating a campaign does not send messages or contact customers.";
+      storageFooter.textContent = "Campaign plans persist between restarts.";
+    } else {
+      storageNote.innerHTML = "<strong>Free hosting:</strong> Campaign plans use temporary storage and may be cleared when the service restarts or redeploys. No messages are sent.";
+      storageFooter.textContent = "Free hosting · Campaign data may reset.";
+    }
     audienceSizes = {
       High: dashboard.risk_distribution.High,
       Medium: dashboard.risk_distribution.Medium,

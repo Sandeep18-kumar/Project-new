@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import os
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
@@ -18,6 +19,9 @@ from sklearn.pipeline import Pipeline
 
 ROOT = Path(__file__).resolve().parent
 DATABASE = ROOT / "data" / "signal.db"
+CAMPAIGN_STORAGE_PERSISTENT = (
+    os.getenv("SIGNAL_STORAGE_PERSISTENT", "true").lower() == "true"
+)
 CONTRACTS = ("Month-to-month", "One year", "Two year")
 INTERNET_TYPES = ("Fiber optic", "DSL", "No")
 PAYMENT_METHODS = ("Electronic check", "Mailed check", "Bank transfer", "Credit card")
@@ -241,6 +245,7 @@ def dashboard() -> dict:
         ),
         "monthly_revenue": round(monthly_revenue, 2),
         "retention_opportunity": round(len(high) * 0.42),
+        "campaign_storage_persistent": CAMPAIGN_STORAGE_PERSISTENT,
         "risk_distribution": {
             band: sum(row["risk"] == band for row in CUSTOMERS)
             for band in ("High", "Medium", "Low")

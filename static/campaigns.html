@@ -28,7 +28,7 @@
       <main class="main-content">
         <header class="topbar"><div class="breadcrumbs">Workspace <span>/</span> <strong>Retention campaigns</strong></div><div class="topbar-actions"><div class="data-status"><span class="status-pulse"></span> Campaign storage online</div><button class="primary-button" id="campaign-create-shortcut"><span>＋</span> New campaign</button></div></header>
         <section class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> RETENTION OPERATIONS</div><h1>Retention <span>campaigns</span></h1><p class="subtitle">Plan, organize, and track targeted customer outreach.</p></div></section>
-        <div class="demo-notice"><span class="notice-icon">✳</span><span><strong>Planning workspace:</strong> Campaigns are saved locally. Creating a campaign does not send messages or contact customers.</span></div>
+        <div class="demo-notice"><span class="notice-icon">✳</span><span id="campaign-storage-note"><strong>Planning workspace:</strong> Creating a campaign saves a plan only; it does not send messages or contact customers.</span></div>
         <section class="metric-grid campaign-metrics">
           <article class="metric-card"><div class="metric-top"><span class="metric-label">TOTAL CAMPAIGNS</span><span class="metric-icon purple">▤</span></div><div class="metric-value" id="campaign-total">—</div><div class="metric-foot"><span class="metric-note">saved in this workspace</span></div></article>
           <article class="metric-card"><div class="metric-top"><span class="metric-label">ACTIVE</span><span class="metric-icon green">●</span></div><div class="metric-value" id="campaign-active">—</div><div class="metric-foot"><span class="metric-note">marked as in progress</span></div></article>
@@ -53,7 +53,7 @@
             <div class="campaign-empty" id="campaign-empty" hidden><span class="detail-symbol">✳</span><strong>No campaigns yet</strong><span>Create your first plan with the form. It will be saved here.</span></div>
           </article>
         </section>
-        <footer class="page-footer"><span>Signal Intelligence · Customer retention, made clearer.</span><span>Plans persist between app restarts.</span></footer>
+        <footer class="page-footer"><span>Signal Intelligence · Customer retention, made clearer.</span><span id="campaign-storage-footer">Campaign storage status loading…</span></footer>
       </main>
     </div>
     <div class="toast" id="toast" role="status"></div>

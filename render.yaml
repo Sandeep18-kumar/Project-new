@@ -2,15 +2,13 @@ services:
   - type: web
     name: signal-churn-dashboard
     runtime: docker
-    plan: starter
+    plan: free
     region: oregon
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /health
-    disk:
-      name: signal-churn-data
-      mountPath: /app/data
-      sizeGB: 1
     envVars:
       - key: PYTHONUNBUFFERED
         value: "1"
+      - key: SIGNAL_STORAGE_PERSISTENT
+        value: "false"
