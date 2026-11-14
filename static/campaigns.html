@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10131d">
+    <title>Retention campaigns — Signal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body data-page="campaigns">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Signal home"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 20.5 10 14l4.5 4 8-10 5.5 4.5"/><path d="M4 26h24"/></svg></span><span class="brand-name">signal<span class="brand-dot">.</span></span></a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link" href="/"><span class="nav-icon">◫</span> Overview</a>
+          <a class="nav-link" href="/customers"><span class="nav-icon">♙</span> Customers</a>
+          <a class="nav-link" href="/insights"><span class="nav-icon">⌁</span> Model insights</a>
+          <a class="nav-link active" href="/campaigns"><span class="nav-icon">✳</span> Campaigns <span class="nav-active-dot"></span></a>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <div class="model-card"><div class="model-card-top"><span class="status-pulse"></span> MODEL STATUS <span class="live-label">LIVE</span></div><div class="model-name">Random Forest</div><div class="model-version">Demo model · v1.0</div><div class="model-divider"></div><div class="model-foot"><span>Scoring engine</span><strong>● Online</strong></div></div>
+        <div class="sidebar-footer"><div class="avatar">S</div><div class="user-meta"><strong>Strategy team</strong><span>Growth workspace</span></div></div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar"><div class="breadcrumbs">Workspace <span>/</span> <strong>Retention campaigns</strong></div><div class="topbar-actions"><div class="data-status"><span class="status-pulse"></span> Campaign storage online</div><button class="primary-button" id="campaign-create-shortcut"><span>＋</span> New campaign</button></div></header>
+        <section class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> RETENTION OPERATIONS</div><h1>Retention <span>campaigns</span></h1><p class="subtitle">Plan, organize, and track targeted customer outreach.</p></div></section>
+        <div class="demo-notice"><span class="notice-icon">✳</span><span><strong>Planning workspace:</strong> Campaigns are saved locally. Creating a campaign does not send messages or contact customers.</span></div>
+        <section class="metric-grid campaign-metrics">
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">TOTAL CAMPAIGNS</span><span class="metric-icon purple">▤</span></div><div class="metric-value" id="campaign-total">—</div><div class="metric-foot"><span class="metric-note">saved in this workspace</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">ACTIVE</span><span class="metric-icon green">●</span></div><div class="metric-value" id="campaign-active">—</div><div class="metric-foot"><span class="metric-note">marked as in progress</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">DRAFTS</span><span class="metric-icon amber">✎</span></div><div class="metric-value" id="campaign-drafts">—</div><div class="metric-foot"><span class="metric-note">ready for team review</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">CUSTOMERS IN ACTIVE CAMPAIGNS</span><span class="metric-icon red">♙</span></div><div class="metric-value" id="campaign-reach">—</div><div class="metric-foot"><span class="metric-note">audience-size total</span></div></article>
+        </section>
+        <section class="campaign-layout">
+          <article class="panel campaign-form-panel">
+            <div class="panel-heading"><div><h2>Create a campaign</h2><p>Save a retention plan to your campaign workspace.</p></div></div>
+            <form id="campaign-form" class="campaign-form">
+              <label>Campaign name<input name="name" type="text" minlength="3" maxlength="80" placeholder="e.g. Welcome back offer" required></label>
+              <label>Target audience<select name="audience"><option value="High">High risk</option><option value="Medium">Medium risk</option><option value="Low">Low risk</option><option value="All">All customers</option></select><span class="field-help" id="audience-estimate">Estimated reach: loading…</span></label>
+              <label>Outreach channel<select name="channel"><option>Email</option><option>SMS</option><option>Phone</option></select></label>
+              <label>Offer or action<textarea name="offer" minlength="3" maxlength="160" rows="3" placeholder="Describe the planned offer or outreach action" required></textarea></label>
+              <button class="primary-button campaign-submit" type="submit" id="campaign-submit">Save as draft <span>→</span></button>
+              <p class="form-disclaimer">This saves a plan only. No emails, texts, or calls are sent.</p>
+            </form>
+          </article>
+          <article class="panel campaign-list-panel">
+            <div class="customers-heading"><div><div class="table-title-row"><h2>Your campaigns</h2><span class="count-pill" id="campaign-count">—</span></div><p>Update campaign progress or remove a plan.</p></div><button class="export-button" id="campaign-refresh"><span>↻</span> Refresh</button></div>
+            <div class="table-scroll"><table><thead><tr><th>CAMPAIGN</th><th>AUDIENCE</th><th>CHANNEL</th><th>REACH</th><th>STATUS</th><th>CREATED</th><th></th></tr></thead><tbody id="campaign-rows"><tr><td class="loading-cell" colspan="7">Loading campaigns…</td></tr></tbody></table></div>
+            <div class="campaign-empty" id="campaign-empty" hidden><span class="detail-symbol">✳</span><strong>No campaigns yet</strong><span>Create your first plan with the form. It will be saved here.</span></div>
+          </article>
+        </section>
+        <footer class="page-footer"><span>Signal Intelligence · Customer retention, made clearer.</span><span>Plans persist between app restarts.</span></footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="/static/workspace.js" defer></script>
+  </body>
+</html>

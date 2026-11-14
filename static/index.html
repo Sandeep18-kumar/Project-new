@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10131d">
+    <meta name="description" content="AI-powered customer churn intelligence and retention dashboard.">
+    <title>Signal — Churn Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Signal home">
+          <span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 20.5 10 14l4.5 4 8-10 5.5 4.5"/><path d="M4 26h24"/></svg></span>
+          <span class="brand-name">signal<span class="brand-dot">.</span></span>
+        </a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link active" href="/"><span class="nav-icon">◫</span> Overview <span class="nav-active-dot"></span></a>
+          <a class="nav-link" href="/customers"><span class="nav-icon">♙</span> Customers <span class="nav-count" id="nav-count">—</span></a>
+          <a class="nav-link" href="/insights"><span class="nav-icon">⌁</span> Model insights</a>
+          <a class="nav-link" href="/campaigns"><span class="nav-icon">✳</span> Campaigns</a>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <div class="model-card">
+          <div class="model-card-top"><span class="status-pulse"></span> MODEL STATUS <span class="live-label">LIVE</span></div>
+          <div class="model-name">Random Forest</div>
+          <div class="model-version">Demo model · v1.0</div>
+          <div class="model-divider"></div>
+          <div class="model-foot"><span>Scoring engine</span><strong>● Online</strong></div>
+        </div>
+        <div class="sidebar-footer">
+          <div class="avatar">S</div>
+          <div class="user-meta"><strong>Strategy team</strong><span>Growth workspace</span></div>
+          <button class="more-button" aria-label="Account options">···</button>
+        </div>
+      </aside>
+
+      <main class="main-content" id="overview">
+        <header class="topbar">
+          <div class="breadcrumbs">Analytics <span>/</span> <strong>Overview</strong></div>
+          <div class="topbar-actions">
+            <div class="data-status"><span class="status-pulse"></span> Updated just now</div>
+            <button class="icon-button" aria-label="Notifications">♧<span class="notification-dot"></span></button>
+            <button class="primary-button" id="open-score"><span>＋</span> Score a customer</button>
+          </div>
+        </header>
+
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> CUSTOMER INTELLIGENCE</div>
+            <h1>Churn <span>overview</span></h1>
+            <p class="subtitle">See who's at risk. Know what to do next.</p>
+          </div>
+          <div class="date-selector"><span class="calendar-icon">▦</span> Last 30 days <span class="chevron">⌄</span></div>
+        </section>
+
+        <div class="demo-notice" id="demo-notice">
+          <span class="notice-icon">✳</span>
+          <span><strong>Demo model:</strong> Scores use synthetic sample data. Connect representative customer data before acting on predictions.</span>
+          <button id="dismiss-notice" aria-label="Dismiss notice">×</button>
+        </div>
+
+        <section class="metric-grid" aria-label="Key metrics">
+          <article class="metric-card">
+            <div class="metric-top"><span class="metric-label">TOTAL CUSTOMERS</span><span class="metric-icon purple">♙</span></div>
+            <div class="metric-value" id="total-customers">—</div>
+            <div class="metric-foot"><span class="metric-note">customers scored</span><span class="mini-sparkline purple-line">⌁</span></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span class="metric-label">HIGH RISK</span><span class="metric-icon red">↗</span></div>
+            <div class="metric-value" id="high-risk">—</div>
+            <div class="metric-foot"><span class="metric-note"><span class="risk-dot high-dot"></span> likely to churn</span><span class="metric-change" id="high-risk-rate">—</span></div>
+          </article>
+          <article class="metric-card">
+            <div class="metric-top"><span class="metric-label">AVG. CHURN RISK</span><span class="metric-icon amber">◉</span></div>
+            <div class="metric-value" id="average-risk">—<small>%</small></div>
+            <div class="metric-foot"><span class="metric-note">across all customers</span><span class="metric-change positive">Model scored</span></div>
+          </article>
+          <article class="metric-card opportunity-card">
+            <div class="metric-top"><span class="metric-label">RETENTION OPPORTUNITY</span><span class="metric-icon green">✳</span></div>
+            <div class="metric-value" id="retention-opportunity">—</div>
+            <div class="metric-foot"><span class="metric-note">high-risk customers to save</span><span class="opportunity-arrow">↗</span></div>
+          </article>
+        </section>
+
+        <section class="insights-grid" id="insights">
+          <article class="panel trend-panel">
+            <div class="panel-heading">
+              <div><h2>Churn risk trend</h2><p>Average predicted churn probability</p></div>
+              <button class="subtle-select">7 months <span>⌄</span></button>
+            </div>
+            <div class="chart-summary"><strong id="chart-current">—%</strong><span class="chart-caption"> current risk</span><span class="chart-trend">↘ <span>Trending down</span></span></div>
+            <div class="chart-wrap"><canvas id="trend-chart" aria-label="Churn risk trend chart" role="img"></canvas><div class="chart-tooltip" id="chart-tooltip"></div></div>
+          </article>
+          <article class="panel distribution-panel">
+            <div class="panel-heading">
+              <div><h2>Risk distribution</h2><p>Customer segments by risk level</p></div>
+              <button class="more-button panel-more" aria-label="More chart options">···</button>
+            </div>
+            <div class="donut-layout">
+              <div class="donut" id="risk-donut"><div class="donut-center"><strong id="donut-total">—</strong><span>customers</span></div></div>
+              <div class="legend">
+                <div><span class="legend-dot high-fill"></span><span>High risk</span><strong id="legend-high">—</strong></div>
+                <div><span class="legend-dot medium-fill"></span><span>Medium risk</span><strong id="legend-medium">—</strong></div>
+                <div><span class="legend-dot low-fill"></span><span>Low risk</span><strong id="legend-low">—</strong></div>
+              </div>
+            </div>
+            <div class="distribution-foot"><span>Customers needing attention</span><strong id="attention-count">—</strong></div>
+          </article>
+        </section>
+
+        <section class="panel customers-panel" id="customers">
+          <div class="customers-heading">
+            <div><div class="table-title-row"><h2>Customers to watch</h2><span class="count-pill" id="watch-count">—</span></div><p>Start with the customers most likely to leave</p></div>
+            <div class="table-actions">
+              <label class="search-box"><span>⌕</span><input id="customer-search" type="search" placeholder="Search customers..." aria-label="Search customers"></label>
+              <label class="filter-box"><span class="filter-icon">☷</span><select id="risk-filter" aria-label="Filter by risk"><option value="All">All risk levels</option><option value="High">High risk</option><option value="Medium">Medium risk</option><option value="Low">Low risk</option></select></label>
+              <button class="export-button" id="export-csv"><span>↧</span> Export</button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <thead><tr><th>CUSTOMER</th><th>RISK SCORE</th><th>RISK LEVEL</th><th>CONTRACT</th><th>TENURE</th><th>MONTHLY</th><th></th></tr></thead>
+              <tbody id="customer-rows"><tr><td class="loading-cell" colspan="7">Loading customer intelligence…</td></tr></tbody>
+            </table>
+          </div>
+          <div class="table-footer"><span id="table-summary">Loading customers…</span><button class="view-all" id="view-all">View all customers <span>→</span></button></div>
+        </section>
+
+        <footer class="page-footer"><span>Signal Intelligence · Customer retention, made clearer.</span><span id="model-footer">Random Forest · Demo model v1.0</span></footer>
+      </main>
+    </div>
+
+    <div class="modal-backdrop" id="score-modal" aria-hidden="true">
+      <section class="score-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> INSTANT PREDICTION</div><h2 id="modal-title">Score a customer</h2><p>Enter a few details to see their churn risk.</p></div><button class="close-modal" id="close-score" aria-label="Close">×</button></div>
+        <form id="score-form">
+          <div class="form-grid">
+            <label>Tenure <span>months</span><input name="tenure_months" type="number" min="0" max="120" value="8" required></label>
+            <label>Monthly charges <span>USD</span><input name="monthly_charges" type="number" min="1" step="0.01" value="85" required></label>
+            <label>Contract<select name="contract"><option>Month-to-month</option><option>One year</option><option>Two year</option></select></label>
+            <label>Internet service<select name="internet_service"><option>Fiber optic</option><option>DSL</option><option>No</option></select></label>
+            <label>Payment method<select name="payment_method"><option>Electronic check</option><option>Mailed check</option><option>Bank transfer</option><option>Credit card</option></select></label>
+            <label>Tech support<select name="tech_support"><option>No</option><option>Yes</option></select></label>
+            <label>Online security<select name="online_security"><option>No</option><option>Yes</option></select></label>
+            <label>Paperless billing<select name="paperless_billing"><option>Yes</option><option>No</option></select></label>
+          </div>
+          <div class="prediction-result" id="prediction-result" aria-live="polite"></div>
+          <div class="modal-actions"><span>Model: Random Forest · demo</span><button class="primary-button" type="submit" id="score-submit">Calculate risk <span>→</span></button></div>
+        </form>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>

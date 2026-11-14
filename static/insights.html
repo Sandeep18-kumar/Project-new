@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10131d">
+    <title>Model insights — Signal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body data-page="insights">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Signal home"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 20.5 10 14l4.5 4 8-10 5.5 4.5"/><path d="M4 26h24"/></svg></span><span class="brand-name">signal<span class="brand-dot">.</span></span></a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link" href="/"><span class="nav-icon">◫</span> Overview</a>
+          <a class="nav-link" href="/customers"><span class="nav-icon">♙</span> Customers</a>
+          <a class="nav-link active" href="/insights"><span class="nav-icon">⌁</span> Model insights <span class="nav-active-dot"></span></a>
+          <a class="nav-link" href="/campaigns"><span class="nav-icon">✳</span> Campaigns</a>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <div class="model-card"><div class="model-card-top"><span class="status-pulse"></span> MODEL STATUS <span class="live-label">LIVE</span></div><div class="model-name">Random Forest</div><div class="model-version">Demo model · v1.0</div><div class="model-divider"></div><div class="model-foot"><span>Scoring engine</span><strong>● Online</strong></div></div>
+        <div class="sidebar-footer"><div class="avatar">S</div><div class="user-meta"><strong>Strategy team</strong><span>Growth workspace</span></div></div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar"><div class="breadcrumbs">Workspace <span>/</span> <strong>Model insights</strong></div><div class="topbar-actions"><div class="data-status"><span class="status-pulse"></span> Inference API online</div></div></header>
+        <section class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> MODEL TRANSPARENCY</div><h1>Model <span>insights</span></h1><p class="subtitle">Understand the current model and safely test a prediction.</p></div></section>
+        <div class="demo-notice"><span class="notice-icon">✳</span><span><strong>Demo model, not production validated.</strong> Synthetic data is used; importance shows associations, not causes.</span></div>
+        <section class="metric-grid insight-metrics">
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">MODEL</span><span class="metric-icon purple">⌁</span></div><div class="metric-value metric-word" id="model-algorithm">—</div><div class="metric-foot"><span class="metric-note" id="model-version">Loading version…</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">TRAINING ROWS</span><span class="metric-icon amber">▤</span></div><div class="metric-value" id="model-rows">—</div><div class="metric-foot"><span class="metric-note">generated demo examples</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">INPUT SIGNALS</span><span class="metric-icon green">⌘</span></div><div class="metric-value" id="model-features">—</div><div class="metric-foot"><span class="metric-note">customer attributes</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">MODEL STATUS</span><span class="metric-icon green">●</span></div><div class="metric-value metric-word" id="model-status">—</div><div class="metric-foot"><span class="metric-note" id="model-trees">Scoring service</span></div></article>
+        </section>
+        <section class="insights-grid model-insights-grid">
+          <article class="panel feature-panel"><div class="panel-heading"><div><h2>Top model signals</h2><p>Relative share of Random Forest feature importance</p></div><span class="count-pill">Not causal</span></div><div class="feature-list" id="feature-list"><div class="loading-cell">Loading model explanation…</div></div><p class="feature-footnote">Feature importance describes how the fitted model uses its inputs. It does not show what causes churn.</p></article>
+          <article class="panel model-about-panel"><div class="panel-heading"><div><h2>About this model</h2><p>Current inference configuration</p></div></div><div class="about-list"><div><span>Estimator</span><strong id="about-estimator">—</strong></div><div><span>Tree count</span><strong id="about-trees">—</strong></div><div><span>Training source</span><strong id="about-source">—</strong></div><div><span>Training examples</span><strong id="about-rows">—</strong></div><div><span>Quality metrics</span><strong class="not-measured">Not measured</strong></div></div><div class="about-note">No held-out validation or calibration report is available for this synthetic demo model.</div></article>
+        </section>
+        <section class="panel test-panel">
+          <div class="customers-heading"><div><div class="table-title-row"><h2>Test a customer prediction</h2><span class="count-pill">Live API</span></div><p>Try feature values; this test does not save customer information.</p></div></div>
+          <form id="insight-score-form" class="score-form">
+            <div class="form-grid">
+              <label>Tenure <span>months</span><input name="tenure_months" type="number" min="0" max="120" value="8" required></label>
+              <label>Monthly charges <span>USD</span><input name="monthly_charges" type="number" min="1" step="0.01" value="85" required></label>
+              <label>Contract<select name="contract"><option>Month-to-month</option><option>One year</option><option>Two year</option></select></label>
+              <label>Internet service<select name="internet_service"><option>Fiber optic</option><option>DSL</option><option>No</option></select></label>
+              <label>Payment method<select name="payment_method"><option>Electronic check</option><option>Mailed check</option><option>Bank transfer</option><option>Credit card</option></select></label>
+              <label>Tech support<select name="tech_support"><option>No</option><option>Yes</option></select></label>
+              <label>Online security<select name="online_security"><option>No</option><option>Yes</option></select></label>
+              <label>Paperless billing<select name="paperless_billing"><option>Yes</option><option>No</option></select></label>
+            </div>
+            <div class="score-form-actions"><span>Prediction is illustrative and not validated for real decisions.</span><button class="primary-button" type="submit" id="insight-score-submit">Run prediction <span>→</span></button></div>
+          </form>
+          <div class="prediction-result insight-prediction" id="insight-prediction" aria-live="polite"></div>
+        </section>
+        <footer class="page-footer"><span>Signal Intelligence · Customer retention, made clearer.</span><span id="insights-footer">Demo model</span></footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="/static/workspace.js" defer></script>
+  </body>
+</html>

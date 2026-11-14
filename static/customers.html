@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10131d">
+    <title>Customers — Signal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body data-page="customers">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Signal home"><span class="brand-mark"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 20.5 10 14l4.5 4 8-10 5.5 4.5"/><path d="M4 26h24"/></svg></span><span class="brand-name">signal<span class="brand-dot">.</span></span></a>
+        <div class="workspace-label">WORKSPACE</div>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a class="nav-link" href="/"><span class="nav-icon">◫</span> Overview</a>
+          <a class="nav-link active" href="/customers"><span class="nav-icon">♙</span> Customers <span class="nav-active-dot"></span></a>
+          <a class="nav-link" href="/insights"><span class="nav-icon">⌁</span> Model insights</a>
+          <a class="nav-link" href="/campaigns"><span class="nav-icon">✳</span> Campaigns</a>
+        </nav>
+        <div class="sidebar-spacer"></div>
+        <div class="model-card"><div class="model-card-top"><span class="status-pulse"></span> MODEL STATUS <span class="live-label">LIVE</span></div><div class="model-name">Random Forest</div><div class="model-version">Demo model · v1.0</div><div class="model-divider"></div><div class="model-foot"><span>Scoring engine</span><strong>● Online</strong></div></div>
+        <div class="sidebar-footer"><div class="avatar">S</div><div class="user-meta"><strong>Strategy team</strong><span>Growth workspace</span></div></div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar"><div class="breadcrumbs">Workspace <span>/</span> <strong>Customers</strong></div><div class="topbar-actions"><div class="data-status"><span class="status-pulse"></span> Scoring engine online</div><button class="export-button" id="customer-export"><span>↧</span> Export segment</button></div></header>
+        <section class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> CUSTOMER RELATIONSHIPS</div><h1>Customer <span>management</span></h1><p class="subtitle">Explore scored profiles, risk segments, and practical next steps.</p></div></section>
+        <div class="demo-notice"><span class="notice-icon">✳</span><span><strong>Demo dataset:</strong> Profiles and churn scores are synthetic examples for product demonstration.</span></div>
+        <section class="metric-grid customer-metrics">
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">CUSTOMERS IN VIEW</span><span class="metric-icon purple">♙</span></div><div class="metric-value" id="customer-total">—</div><div class="metric-foot"><span class="metric-note">matching your filters</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">HIGH RISK</span><span class="metric-icon red">↗</span></div><div class="metric-value" id="customer-high">—</div><div class="metric-foot"><span class="metric-note">priority outreach</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">REVENUE AT RISK</span><span class="metric-icon amber">$</span></div><div class="metric-value" id="customer-revenue">—</div><div class="metric-foot"><span class="metric-note">monthly charges in view</span></div></article>
+          <article class="metric-card"><div class="metric-top"><span class="metric-label">AVG. CUSTOMER TENURE</span><span class="metric-icon green">◷</span></div><div class="metric-value" id="customer-tenure">—</div><div class="metric-foot"><span class="metric-note">months in service</span></div></article>
+        </section>
+        <section class="panel customers-panel customer-manager-panel">
+          <div class="customers-heading"><div><div class="table-title-row"><h2>Customer directory</h2><span class="count-pill" id="directory-count">—</span></div><p>Search profiles, focus a risk segment, and inspect recommendations.</p></div>
+            <div class="table-actions"><label class="search-box"><span>⌕</span><input id="directory-search" type="search" placeholder="Name or customer ID..." aria-label="Search customers"></label><label class="filter-box"><span class="filter-icon">☷</span><select id="directory-risk" aria-label="Filter by risk"><option>All</option><option>High</option><option>Medium</option><option>Low</option></select></label></div>
+          </div>
+          <div class="table-scroll"><table><thead><tr><th>CUSTOMER</th><th>RISK SCORE</th><th>SEGMENT</th><th>CONTRACT</th><th>TENURE</th><th>MONTHLY</th><th></th></tr></thead><tbody id="directory-rows"><tr><td class="loading-cell" colspan="7">Loading customer profiles…</td></tr></tbody></table></div>
+          <div class="table-footer"><span id="directory-summary">Loading customers…</span><span>Sorted by predicted churn risk</span></div>
+        </section>
+        <section class="panel customer-detail-panel" id="customer-detail"><div class="empty-detail"><span class="detail-symbol">♙</span><strong>Select a customer</strong><span>Choose a profile above to view their risk factors and retention suggestions.</span></div></section>
+        <footer class="page-footer"><span>Signal Intelligence · Customer retention, made clearer.</span><span>Scores are for demonstration only.</span></footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="/static/workspace.js" defer></script>
+  </body>
+</html>
